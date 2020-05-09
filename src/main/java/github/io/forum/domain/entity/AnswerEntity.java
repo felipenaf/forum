@@ -2,29 +2,30 @@ package github.io.forum.domain.entity;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
-@Table( name = "question" )
-public class QuestionEntity {
+@Table( name = "answer" )
+public class AnswerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @ManyToOne
+    @JoinColumn(name = "id_question")
+    private QuestionEntity question;
+
     private String content;
     private String user;
-
-    @OneToMany( mappedBy = "question" , fetch = FetchType.LAZY )
-    private Set<AnswerEntity> answer;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="creation_date", nullable = false, columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
     private Date creationDate = new Date();
 
-    public QuestionEntity() {}
+    public AnswerEntity() {}
 
-    public QuestionEntity(String content, String user) {
+    public AnswerEntity(QuestionEntity question, String content, String user) {
+        this.question = question;
         this.content = content;
         this.user = user;
     }
@@ -35,14 +36,6 @@ public class QuestionEntity {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Set<AnswerEntity> getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(Set<AnswerEntity> answer) {
-        this.answer = answer;
     }
 
     public String getContent() {
@@ -67,15 +60,5 @@ public class QuestionEntity {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
-    }
-
-    @Override
-    public String toString() {
-        return "QuestionEntity{" +
-                "id=" + id +
-                ", content='" + content + '\'' +
-                ", user='" + user + '\'' +
-                ", creationDate='" + creationDate + '\'' +
-                '}';
     }
 }

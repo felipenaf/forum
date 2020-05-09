@@ -4,11 +4,9 @@ import github.io.forum.domain.entity.QuestionEntity;
 import github.io.forum.domain.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -28,10 +26,28 @@ public class QuestionController {
         Optional<QuestionEntity> questionEntity = questionRepository.findById(id);
 
         if((questionEntity).isPresent()){
-            return ResponseEntity.ok( questionEntity.get() );
+            return ResponseEntity.ok(questionEntity.get());
         }
 
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/")
+    public ResponseEntity getQuestions() {
+        List<QuestionEntity> questionEntity = questionRepository.findAll();
+
+        if((questionEntity).size() > 0){
+            return ResponseEntity.ok(questionEntity);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity saveQuestion(@RequestBody QuestionEntity question) {
+        QuestionEntity questionSaved = questionRepository.save(question);
+
+        return ResponseEntity.ok(questionSaved);
     }
 
 }
