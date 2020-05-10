@@ -3,6 +3,7 @@ package github.io.forum.rest.controller;
 import github.io.forum.domain.entity.QuestionEntity;
 import github.io.forum.domain.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +14,18 @@ import java.util.Optional;
 @RequestMapping("/question")
 public class QuestionController {
 
+    @Autowired
     private QuestionRepository questionRepository;
 
-    @Autowired
-    public QuestionController(QuestionRepository qr) {
-        this.questionRepository = qr;
+    @GetMapping("/")
+    public ResponseEntity getQuestions() {
+        List<QuestionEntity> questionEntity = questionRepository.findAll();
+
+        if((questionEntity).size() > 0){
+            return ResponseEntity.ok(questionEntity);
+        }
+
+        return ResponseEntity.ok(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/{id}")
@@ -32,22 +40,11 @@ public class QuestionController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/")
-    public ResponseEntity getQuestions() {
-        List<QuestionEntity> questionEntity = questionRepository.findAll();
-
-        if((questionEntity).size() > 0){
-            return ResponseEntity.ok(questionEntity);
-        }
-
-        return ResponseEntity.notFound().build();
-    }
-
     @PostMapping("/create")
     public ResponseEntity saveQuestion(@RequestBody QuestionEntity question) {
         QuestionEntity questionSaved = questionRepository.save(question);
 
-        return ResponseEntity.ok(questionSaved);
+        return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
 }

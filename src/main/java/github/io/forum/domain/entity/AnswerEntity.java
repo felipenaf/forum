@@ -6,8 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table( name = "answer" )
-public class AnswerEntity implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class AnswerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -63,4 +62,9 @@ public class AnswerEntity implements Serializable {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
+
+    public void setQuestion(QuestionEntity question) {
+        this.question = question;
+    }
+
 }

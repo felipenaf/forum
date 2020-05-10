@@ -1,14 +1,12 @@
 package github.io.forum.domain.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Table( name = "question" )
-public class QuestionEntity implements Serializable {
-    private static final long serialVersionUID2 = 1L;
+public class QuestionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
