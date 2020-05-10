@@ -1,11 +1,10 @@
 package github.io.forum.domain.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table( name = "answer" )
+@Table(name = "answer")
 public class AnswerEntity {
 
     @Id

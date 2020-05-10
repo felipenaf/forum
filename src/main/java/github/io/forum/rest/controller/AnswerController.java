@@ -17,8 +17,8 @@ public class AnswerController {
     @Autowired
     private AnswerRepository answerRepository;
 
-    @PostMapping("/create")
-    public ResponseEntity saveAnswer(@RequestBody AnswerEntity answer) {
+    @PostMapping("/")
+    public ResponseEntity save(@RequestBody AnswerEntity answer) {
         AnswerEntity answerSaved = answerRepository.save(answer);
 
         return new ResponseEntity(HttpStatus.CREATED);
