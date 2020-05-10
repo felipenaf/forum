@@ -15,12 +15,15 @@ public class QuestionEntity {
     private String content;
     private String user;
 
-    @OneToMany( mappedBy = "question" , fetch = FetchType.LAZY )
-    private Set<AnswerEntity> answer;
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="creation_date", nullable = false, columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
     private Date creationDate = new Date();
+
+    @Column(name="deleted", nullable = false, columnDefinition = "tinyint default false")
+    private boolean deleted;
+
+    @OneToMany( mappedBy = "question" , fetch = FetchType.LAZY )
+    private Set<AnswerEntity> answer;
 
     public QuestionEntity() {}
 
@@ -67,6 +70,14 @@ public class QuestionEntity {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     @Override

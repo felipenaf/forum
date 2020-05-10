@@ -20,7 +20,7 @@ public class QuestionController {
 
     @GetMapping("/")
     public ResponseEntity getAll() {
-        List<QuestionEntity> questionEntity = questionRepository.findAll();
+        List<QuestionEntity> questionEntity = questionRepository.findAllByDeleted(false);
 
         if((questionEntity).size() > 0){
             return ResponseEntity.ok(questionEntity);
@@ -49,15 +49,18 @@ public class QuestionController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Integer id){
-        Optional<QuestionEntity> question = questionRepository.findById(id);
+    public ResponseEntity<QuestionEntity> update(@PathVariable Integer id){
+        Optional<QuestionEntity> questionExistente = questionRepository.findById(id);
 
-        if(question.isPresent()){
-            questionRepository.delete(question.get());
-            return ResponseEntity.noContent().build();
+        if (questionExistente.isPresent()) {
+            QuestionEntity question = questionExistente.get();
+            question.setDeleted(true);
+            questionRepository.save(question);
+            return new ResponseEntity<QuestionEntity>(question, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
