@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,18 +19,18 @@ public class QuestionController {
     private QuestionRepository questionRepository;
 
     @GetMapping("/")
-    public ResponseEntity getQuestions() {
+    public ResponseEntity getAll() {
         List<QuestionEntity> questionEntity = questionRepository.findAll();
 
         if((questionEntity).size() > 0){
             return ResponseEntity.ok(questionEntity);
         }
 
-        return ResponseEntity.ok(HttpStatus.NOT_FOUND);
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getQuestionById(@PathVariable Integer id)
+    public ResponseEntity getById(@PathVariable Integer id)
     {
         Optional<QuestionEntity> questionEntity = questionRepository.findById(id);
 
@@ -40,11 +41,38 @@ public class QuestionController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/create")
-    public ResponseEntity saveQuestion(@RequestBody QuestionEntity question) {
+    @PostMapping("/")
+    public ResponseEntity save(@RequestBody QuestionEntity question) {
         QuestionEntity questionSaved = questionRepository.save(question);
 
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable Integer id){
+        Optional<QuestionEntity> question = questionRepository.findById(id);
+
+        if(question.isPresent()){
+            questionRepository.delete(question.get());
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<QuestionEntity> update(@PathVariable Integer id, @Valid @RequestBody QuestionEntity newQuestion){
+        Optional<QuestionEntity> questionExistente = questionRepository.findById(id);
+
+        if (questionExistente.isPresent()) {
+            QuestionEntity question = questionExistente.get();
+            question.setContent(newQuestion.getContent());
+            questionRepository.save(question);
+            return new ResponseEntity<QuestionEntity>(question, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 
 }
