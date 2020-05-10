@@ -1,19 +1,16 @@
-package github.io.forum.domain.entity;
+package github.io.forum.rest.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
-@Table(name = "answer")
-public class AnswerEntity {
+@Table( name = "question" )
+public class QuestionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-    @ManyToOne
-    @JoinColumn(name = "id_question")
-    private QuestionEntity question;
 
     private String content;
     private String user;
@@ -22,10 +19,15 @@ public class AnswerEntity {
     @Column(name="creation_date", nullable = false, columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
     private Date creationDate = new Date();
 
-    public AnswerEntity() {}
+    @Column(name="deleted", nullable = false, columnDefinition = "tinyint default false")
+    private boolean deleted;
 
-    public AnswerEntity(QuestionEntity question, String content, String user) {
-        this.question = question;
+    @OneToMany( mappedBy = "question" , fetch = FetchType.LAZY )
+    private Set<AnswerEntity> answer;
+
+    public QuestionEntity() {}
+
+    public QuestionEntity(String content, String user) {
         this.content = content;
         this.user = user;
     }
@@ -36,6 +38,14 @@ public class AnswerEntity {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Set<AnswerEntity> getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Set<AnswerEntity> answer) {
+        this.answer = answer;
     }
 
     public String getContent() {
@@ -62,8 +72,21 @@ public class AnswerEntity {
         this.creationDate = creationDate;
     }
 
-    public void setQuestion(QuestionEntity question) {
-        this.question = question;
+    public boolean isDeleted() {
+        return deleted;
     }
 
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    @Override
+    public String toString() {
+        return "QuestionEntity{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", user='" + user + '\'' +
+                ", creationDate='" + creationDate + '\'' +
+                '}';
+    }
 }

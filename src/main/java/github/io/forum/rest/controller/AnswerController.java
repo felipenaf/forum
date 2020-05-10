@@ -1,7 +1,7 @@
 package github.io.forum.rest.controller;
 
-import github.io.forum.domain.entity.AnswerEntity;
-import github.io.forum.domain.repository.AnswerRepository;
+import github.io.forum.rest.entity.AnswerEntity;
+import github.io.forum.rest.repository.AnswerRepository;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
