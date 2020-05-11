@@ -1,6 +1,5 @@
 package github.io.forum;
 
-import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
