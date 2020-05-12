@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
@@ -22,7 +23,7 @@ public class QuestionController {
     @ApiOperation(
             value = "Retornar todas a perguntas"
     )
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity getAll() {
         List<QuestionEntity> questionEntity = questionRepository.findAllByDeleted(false);
 
@@ -51,7 +52,7 @@ public class QuestionController {
     @ApiOperation(
             value = "Persistir uma pergunta"
     )
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity save(@RequestBody QuestionEntity question) {
         QuestionEntity questionSaved = questionRepository.save(question);
 

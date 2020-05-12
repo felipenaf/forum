@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/answer")
 public class AnswerController {
@@ -21,7 +22,7 @@ public class AnswerController {
     @ApiOperation(
             value = "Persistir uma resposta"
     )
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity save(@RequestBody AnswerEntity answer) {
         AnswerEntity answerSaved = answerRepository.save(answer);
 
