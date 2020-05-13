@@ -20,7 +20,7 @@ A aplicação é inciada na porta 8080.
 
 A [collection](https://www.getpostman.com/collections/b7138159dde24860eed9) do Postman com todas as requisições possíveis.
 
-Tem também o enpoint `/swagger-ui.html#`onde está mapeado os endpoints da api.
+Tem também o endpoint `/swagger-ui.html#`onde está mapeado os endpoints da api.
 
 ## Problemas que não consegui resolver
 - No swagger ele trará o controller `basic-error-controller`, procurei alguns tutoriais pra remover ele, mas nenhum me ajudou. 
