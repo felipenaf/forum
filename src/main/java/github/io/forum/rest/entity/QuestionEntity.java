@@ -22,6 +22,7 @@ public class QuestionEntity {
     @Column(name="deleted", nullable = false, columnDefinition = "tinyint default false")
     private boolean deleted;
 
+    @OrderBy("id DESC")
     @OneToMany( mappedBy = "question" , fetch = FetchType.LAZY )
     private Set<AnswerEntity> answer;
 
