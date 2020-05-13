@@ -1,4 +1,4 @@
-package github.io.forum;
+package github.io.forum.config;
 
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
