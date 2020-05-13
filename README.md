@@ -12,7 +12,7 @@ Ter o `JDK(Java Development Kit)`
 
 Após clonar o projeto, acessar a raiz pelo terminal e executar os seguintes comandos em sequência:
 
--- `mvn spring-boot:run`
+- `mvn spring-boot:run`
 
 ## Observações
 
@@ -23,6 +23,6 @@ A [collection](https://www.getpostman.com/collections/b7138159dde24860eed9) do P
 Tem também o enpoint `/swagger-ui.html#`onde está mapeado os endpoints da api.
 
 ## Problemas que não consegui resolver
--- No swagger ele trará o controller `basic-error-controller`, procurei alguns tutoriais pra remover ele, mas nenhum me ajudou. 
+- No swagger ele trará o controller `basic-error-controller`, procurei alguns tutoriais pra remover ele, mas nenhum me ajudou. 
 
--- Acabei não fazendo o teste unitário.
+- Acabei não fazendo o teste unitário.
