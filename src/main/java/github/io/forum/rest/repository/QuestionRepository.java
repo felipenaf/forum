@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<QuestionEntity, Integer > {
 
-    List<QuestionEntity> findAllByDeleted(Boolean deleted);
+    List<QuestionEntity> findAllByDeletedOrderByCreationDateDesc(Boolean deleted);
 
 }
 

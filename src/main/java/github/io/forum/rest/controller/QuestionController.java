@@ -25,7 +25,7 @@ public class QuestionController {
     )
     @GetMapping("")
     public ResponseEntity getAll() {
-        List<QuestionEntity> questionEntity = questionRepository.findAllByDeleted(false);
+        List<QuestionEntity> questionEntity = questionRepository.findAllByDeletedOrderByCreationDateDesc(false);
 
         if((questionEntity).size() > 0){
             return ResponseEntity.ok(questionEntity);
@@ -56,7 +56,7 @@ public class QuestionController {
     public ResponseEntity save(@RequestBody QuestionEntity question) {
         QuestionEntity questionSaved = questionRepository.save(question);
 
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity(questionSaved, HttpStatus.CREATED);
     }
 
     @ApiOperation(
