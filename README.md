@@ -10,7 +10,7 @@ Ter o `JDK(Java Development Kit)`
 
 ## Inciar a aplicação
 
-Após clonar o projeto, acessar a raiz pelo terminal e executar os seguintes comandos em sequência:
+Após clonar o projeto, acessar a raiz pelo terminal e executar o seguinte comando:
 
 - `mvn spring-boot:run`
 
