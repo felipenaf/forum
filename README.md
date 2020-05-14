@@ -1,3 +1,4 @@
+
 # Forum
 
 API desenvolvida para um desafio com Java Spring Boot.
@@ -16,13 +17,18 @@ Após clonar o projeto, acessar a raiz pelo terminal e executar o seguinte coman
 
 ## Observações
 
-A aplicação é inciada na porta 8080.
+- A aplicação é inciada na porta 8080.
 
-Rodar o teste unitário com o comando `mvn test`
+- A base de dados é em memória
+	- endpoint: `/h2-console`
+	- username: `forum`
+	- password: `123` 
 
-A [collection](https://www.getpostman.com/collections/b7138159dde24860eed9) do Postman com todas as requisições possíveis.
+- Endpoint para acessar a dosumentação da API: `/swagger-ui.html#`
 
-Tem também o endpoint `/swagger-ui.html#`onde está mapeado os endpoints da api.
+- Rodar o teste unitário com o comando `mvn test`
+
+- A [collection](https://www.getpostman.com/collections/b7138159dde24860eed9) do Postman com todas as requisições disponíveis.
 
 ## Problemas que não consegui resolver
 - No swagger ele trará o controller `basic-error-controller`, procurei alguns tutoriais pra remover ele, mas nenhum me ajudou.
