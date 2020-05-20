@@ -1,4 +1,6 @@
-package github.io.forum.rest.entity;
+package github.io.forum.entities;
+
+import github.io.forum.models.Question;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -31,6 +33,25 @@ public class QuestionEntity {
     public QuestionEntity(String content, String user) {
         this.content = content;
         this.user = user;
+    }
+
+    public QuestionEntity(Question question) {
+        if(question != null) {
+            this.content = question.getContent();
+            this.creationDate = question.getCreationDate();
+            this.user = question.getUser();
+        }
+
+    }
+
+    public Question toModel() {
+        Question question = new Question();
+
+        question.setContent(this.content);
+        question.setUser(this.user);
+        question.setCreationDate(this.creationDate);
+
+        return question;
     }
 
     public Integer getId() {

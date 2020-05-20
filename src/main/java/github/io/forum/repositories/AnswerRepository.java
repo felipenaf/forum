@@ -1,6 +1,6 @@
-package github.io.forum.rest.repository;
+package github.io.forum.repositories;
 
-import github.io.forum.rest.entity.AnswerEntity;
+import github.io.forum.entities.AnswerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AnswerRepository extends JpaRepository<AnswerEntity, Integer > {}

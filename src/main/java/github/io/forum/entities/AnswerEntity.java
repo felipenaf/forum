@@ -1,4 +1,4 @@
-package github.io.forum.rest.entity;
+package github.io.forum.entities;
 
 import javax.persistence.*;
 import java.util.Date;

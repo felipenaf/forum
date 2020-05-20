@@ -1,9 +1,9 @@
 package github.io.forum;
 
-import github.io.forum.rest.entity.AnswerEntity;
-import github.io.forum.rest.entity.QuestionEntity;
-import github.io.forum.rest.repository.AnswerRepository;
-import github.io.forum.rest.repository.QuestionRepository;
+import github.io.forum.entities.AnswerEntity;
+import github.io.forum.entities.QuestionEntity;
+import github.io.forum.repositories.AnswerRepository;
+import github.io.forum.repositories.QuestionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +26,11 @@ public class AnswerRepositoryTest {
         QuestionEntity questionEntity = new QuestionEntity("Pra que serve o @Controller?", "Felipe");
         this.questionRepository.save(questionEntity);
 
-        AnswerEntity answerEntity = new AnswerEntity(questionEntity, "Criar um controller", "Shibata");
+        AnswerEntity answerEntity = new AnswerEntity(questionEntity, "Criar um controllers", "Shibata");
         this.answerRepository.save(answerEntity);
 
         assertThat(answerEntity.getId()).isNotNull();
-        assertThat(answerEntity.getContent()).isEqualTo("Criar um controller");
+        assertThat(answerEntity.getContent()).isEqualTo("Criar um controllers");
         assertThat(answerEntity.getUser()).isEqualTo("Shibata");
     }
 
