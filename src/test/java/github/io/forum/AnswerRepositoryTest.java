@@ -1,9 +1,9 @@
 package github.io.forum;
 
-import github.io.forum.rest.entity.AnswerEntity;
-import github.io.forum.rest.entity.QuestionEntity;
-import github.io.forum.rest.repository.AnswerRepository;
-import github.io.forum.rest.repository.QuestionRepository;
+import github.io.forum.entity.AnswerEntity;
+import github.io.forum.entity.QuestionEntity;
+import github.io.forum.repository.AnswerRepository;
+import github.io.forum.repository.QuestionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

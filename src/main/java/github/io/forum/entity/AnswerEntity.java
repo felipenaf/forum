@@ -1,16 +1,19 @@
-package github.io.forum.rest.entity;
+package github.io.forum.entity;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
-@Table( name = "question" )
-public class QuestionEntity {
+@Table(name = "answer")
+public class AnswerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_question")
+    private QuestionEntity question;
 
     private String content;
     private String user;
@@ -19,16 +22,10 @@ public class QuestionEntity {
     @Column(name="creation_date", nullable = false, columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
     private Date creationDate = new Date();
 
-    @Column(name="deleted", nullable = false, columnDefinition = "tinyint default false")
-    private boolean deleted;
+    public AnswerEntity() {}
 
-    @OrderBy("id DESC")
-    @OneToMany( mappedBy = "question" , fetch = FetchType.LAZY )
-    private Set<AnswerEntity> answer;
-
-    public QuestionEntity() {}
-
-    public QuestionEntity(String content, String user) {
+    public AnswerEntity(QuestionEntity question, String content, String user) {
+        this.question = question;
         this.content = content;
         this.user = user;
     }
@@ -39,14 +36,6 @@ public class QuestionEntity {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Set<AnswerEntity> getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(Set<AnswerEntity> answer) {
-        this.answer = answer;
     }
 
     public String getContent() {
@@ -73,21 +62,8 @@ public class QuestionEntity {
         this.creationDate = creationDate;
     }
 
-    public boolean isDeleted() {
-        return deleted;
+    public void setQuestion(QuestionEntity question) {
+        this.question = question;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
-    @Override
-    public String toString() {
-        return "QuestionEntity{" +
-                "id=" + id +
-                ", content='" + content + '\'' +
-                ", user='" + user + '\'' +
-                ", creationDate='" + creationDate + '\'' +
-                '}';
-    }
 }

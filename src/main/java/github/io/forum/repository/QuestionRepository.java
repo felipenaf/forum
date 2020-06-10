@@ -1,6 +1,6 @@
-package github.io.forum.rest.repository;
+package github.io.forum.repository;
 
-import github.io.forum.rest.entity.QuestionEntity;
+import github.io.forum.entity.QuestionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
