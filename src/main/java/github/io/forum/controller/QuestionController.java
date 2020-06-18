@@ -1,7 +1,7 @@
 package github.io.forum.controller;
 
 import github.io.forum.entity.QuestionEntity;
-import github.io.forum.repository.QuestionRepository;
+import github.io.forum.service.QuestionService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,75 +18,58 @@ import java.util.Optional;
 public class QuestionController {
 
     @Autowired
-    private QuestionRepository questionRepository;
+    private QuestionService questionService;
 
-    @ApiOperation(
-            value = "Retornar todas a perguntas"
-    )
+    @ApiOperation(value = "Retornar todas a perguntas")
     @GetMapping("")
     public ResponseEntity getAll() {
-        List<QuestionEntity> questionEntity = questionRepository.findAllByDeletedOrderByCreationDateDesc(false);
+        List<QuestionEntity> questionEntity = questionService.getAll();
 
-        if((questionEntity).size() > 0){
+        if(questionEntity.size() > 0){
             return ResponseEntity.ok(questionEntity);
         }
 
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
-    @ApiOperation(
-            value = "Retornar uma pergunta"
-    )
+    @ApiOperation(value = "Retornar uma pergunta")
     @GetMapping("/{id}")
     public ResponseEntity getById(@PathVariable Integer id)
     {
-        Optional<QuestionEntity> questionEntity = questionRepository.findById(id);
+        Optional<QuestionEntity> questionEntity = questionService.getById(id);
 
-        if((questionEntity).isPresent()){
+        if(questionEntity.isPresent()){
             return ResponseEntity.ok(questionEntity.get());
         }
 
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
-    @ApiOperation(
-            value = "Persistir uma pergunta"
-    )
+    @ApiOperation(value = "Persistir uma pergunta")
     @PostMapping("")
     public ResponseEntity save(@RequestBody QuestionEntity question) {
-        QuestionEntity questionSaved = questionRepository.save(question);
-
+        QuestionEntity questionSaved = questionService.save(question);
         return new ResponseEntity(questionSaved, HttpStatus.CREATED);
     }
 
-    @ApiOperation(
-            value = "Apagar uma pergunta"
-    )
+    @ApiOperation(value = "Apagar uma pergunta")
     @DeleteMapping("/{id}")
-    public ResponseEntity<QuestionEntity> update(@PathVariable Integer id){
-        Optional<QuestionEntity> questionExistente = questionRepository.findById(id);
+    public ResponseEntity<QuestionEntity> delete(@PathVariable Integer id){
+        QuestionEntity questionDeleted = questionService.delete(id);
 
-        if (questionExistente.isPresent()) {
-            QuestionEntity question = questionExistente.get();
-            question.setDeleted(true);
-            questionRepository.save(question);
+        if (questionDeleted != null) {
             return new ResponseEntity(HttpStatus.OK);
         }
 
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
-    @ApiOperation(
-            value = "Editar uma pergunta"
-    )
+    @ApiOperation(value = "Editar uma pergunta")
     @PutMapping("/{id}")
     public ResponseEntity<QuestionEntity> update(@PathVariable Integer id, @Valid @RequestBody QuestionEntity newQuestion){
-        Optional<QuestionEntity> questionExistente = questionRepository.findById(id);
+        QuestionEntity questionUpdated = questionService.update(id, newQuestion);
 
-        if (questionExistente.isPresent()) {
-            QuestionEntity question = questionExistente.get();
-            question.setContent(newQuestion.getContent());
-            questionRepository.save(question);
+        if (questionUpdated != null) {
             return new ResponseEntity(HttpStatus.OK);
         }
 
