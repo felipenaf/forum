@@ -1,7 +1,7 @@
 
 # Forum
 
-API desenvolvida para um desafio com Java Spring Boot.
+API desenvolvida com Java Spring Boot.
 
 ## Requisitos
 
@@ -31,4 +31,4 @@ Após clonar o projeto, acessar a raiz pelo terminal e executar o seguinte coman
 - A [collection](https://www.getpostman.com/collections/b7138159dde24860eed9) do Postman com todas as requisições disponíveis.
 
 ## Problemas que não consegui resolver
-- No swagger ele trará o controller `basic-error-controller`, procurei alguns tutoriais pra remover ele, mas nenhum me ajudou.
+- No swagger ele trará o controller `basic-error-controller`, procurei alguns tutoriais pra remover ele, mas não consegui resolver.
