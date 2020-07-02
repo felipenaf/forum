@@ -17,4 +17,4 @@ public interface QuestionService {
 
     public QuestionEntity update(Integer id, QuestionEntity newQuestion);
 
-    }
+}

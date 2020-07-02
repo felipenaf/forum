@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/question")
+@RequestMapping("/questions")
 public class QuestionController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class QuestionController {
         List<QuestionEntity> questionEntity = questionService.getAll();
 
         if(questionEntity.size() > 0){
-            return ResponseEntity.ok(questionEntity);
+            return new ResponseEntity(questionEntity, HttpStatus.OK);
         }
 
         return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -39,7 +39,7 @@ public class QuestionController {
         Optional<QuestionEntity> questionEntity = questionService.getById(id);
 
         if(questionEntity.isPresent()){
-            return ResponseEntity.ok(questionEntity.get());
+            return new ResponseEntity(questionEntity.get(), HttpStatus.OK);
         }
 
         return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -48,6 +48,10 @@ public class QuestionController {
     @ApiOperation(value = "Persistir uma pergunta")
     @PostMapping("")
     public ResponseEntity save(@RequestBody QuestionEntity question) {
+        if (question.getUser() == null || question.getContent() == null) {
+            return new ResponseEntity(question, HttpStatus.BAD_REQUEST);
+        }
+
         QuestionEntity questionSaved = questionService.save(question);
         return new ResponseEntity(questionSaved, HttpStatus.CREATED);
     }
@@ -67,10 +71,14 @@ public class QuestionController {
     @ApiOperation(value = "Editar uma pergunta")
     @PutMapping("/{id}")
     public ResponseEntity<QuestionEntity> update(@PathVariable Integer id, @Valid @RequestBody QuestionEntity newQuestion){
+        if (newQuestion.getContent() == null) {
+            return new ResponseEntity(newQuestion, HttpStatus.BAD_REQUEST);
+        }
+
         QuestionEntity questionUpdated = questionService.update(id, newQuestion);
 
         if (questionUpdated != null) {
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(questionUpdated, HttpStatus.OK);
         }
 
         return new ResponseEntity(HttpStatus.NOT_FOUND);
