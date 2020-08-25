@@ -1,34 +1,36 @@
 
 # Forum
 
-API desenvolvida com Java Spring Boot.
+# Sobre
+API desenvolvida para um desafio com Java Spring Boot.
 
-## Requisitos
+# Iniciando
+## Pré-requisitos
+- `maven`
 
-Ter o gerenciador de pacotes `maven`
+- `JDK`
 
-Ter o `JDK(Java Development Kit)`
+## Instalação
 
-## Inciar a aplicação
+- ### 1. Clonar o repositório
+    `git clone https://github.com/felipenaf/forum`
 
-Após clonar o projeto, acessar a raiz pelo terminal e executar o seguinte comando:
-
-- `mvn spring-boot:run`
+- ### 2. Executar o projeto
+	`mvn spring-boot:run`
 
 ## Observações
+### Base de dados
+A base de dados é em memória
 
-- A aplicação é inciada na porta 8080.
+- endpoint: `/h2-console`
+- username: `forum`
+- password: `123` 
 
-- A base de dados é em memória
-	- endpoint: `/h2-console`
-	- username: `forum`
-	- password: `123` 
+### Documentação: 
+- `/swagger-ui.html#`
 
-- Endpoint para acessar a dosumentação da API: `/swagger-ui.html#`
+### Teste unitário
+- `mvn test`
 
-- Rodar o teste unitário com o comando `mvn test`
-
-- A [collection](https://www.getpostman.com/collections/b7138159dde24860eed9) do Postman com todas as requisições disponíveis.
-
-## Problemas que não consegui resolver
-- No swagger ele trará o controller `basic-error-controller`, procurei alguns tutoriais pra remover ele, mas não consegui resolver.
+# Problemas
+- No swagger ele trará o controller `basic-error-controller`, procurei alguns tutoriais pra remover ele, porém sem sucesso.
