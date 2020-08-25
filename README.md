@@ -2,6 +2,7 @@
 # Forum
 
 # Sobre
+Um simulador de fórum simples de perguntas e respostas. 
 API desenvolvida para um desafio com Java Spring Boot.
 
 # Iniciando
