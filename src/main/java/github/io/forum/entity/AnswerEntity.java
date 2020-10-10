@@ -1,5 +1,7 @@
 package github.io.forum.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -66,4 +68,7 @@ public class AnswerEntity {
         this.question = question;
     }
 
+    public QuestionEntity getQuestion() {
+        return question;
+    }
 }

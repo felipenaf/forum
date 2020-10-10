@@ -1,5 +1,7 @@
 package github.io.forum.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -24,6 +26,7 @@ public class QuestionEntity {
 
     @OrderBy("id DESC")
     @OneToMany( mappedBy = "question" , fetch = FetchType.LAZY )
+    @JsonIgnoreProperties("question")
     private Set<AnswerEntity> answer;
 
     public QuestionEntity() {}
