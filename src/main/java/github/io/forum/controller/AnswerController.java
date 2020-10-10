@@ -45,12 +45,9 @@ public class AnswerController {
     @ApiOperation(value = "Editar uma resposta")
     @PutMapping("/{id}")
     public ResponseEntity<AnswerEntity> update(@PathVariable Integer id, @Valid @RequestBody AnswerEntity newAnswer){
-        Optional<AnswerEntity> answerExistente = answerRepository.findById(id);
+        AnswerEntity answer = answerService.update(id, newAnswer);
 
-        if (answerExistente.isPresent()) {
-            AnswerEntity answer = answerExistente.get();
-            answer.setContent(newAnswer.getContent());
-            answerRepository.save(answer);
+        if (answer != null) {
             return new ResponseEntity<AnswerEntity>(answer, HttpStatus.OK);
         }
 

@@ -4,6 +4,7 @@ import github.io.forum.entity.AnswerEntity;
 import github.io.forum.repository.AnswerRepository;
 import github.io.forum.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,15 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public AnswerEntity update(Integer id, AnswerEntity newAnswer) {
+        Optional<AnswerEntity> answerExistente = answerRepository.findById(id);
+
+        if (answerExistente.isPresent()) {
+            AnswerEntity answer = answerExistente.get();
+            answer.setContent(newAnswer.getContent());
+            answerRepository.save(answer);
+            return answer;
+        }
+
         return null;
     }
 }
