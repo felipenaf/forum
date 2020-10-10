@@ -1,7 +1,6 @@
 package github.io.forum.controller;
 
 import github.io.forum.entity.AnswerEntity;
-import github.io.forum.repository.AnswerRepository;
 import github.io.forum.service.AnswerService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/answer")
 public class AnswerController {
-
-    @Autowired
-    private AnswerRepository answerRepository;
 
     @Autowired
     private AnswerService answerService;

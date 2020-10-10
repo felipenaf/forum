@@ -4,8 +4,6 @@ import github.io.forum.entity.AnswerEntity;
 import github.io.forum.repository.AnswerRepository;
 import github.io.forum.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
