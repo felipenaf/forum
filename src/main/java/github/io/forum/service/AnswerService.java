@@ -6,7 +6,7 @@ public interface AnswerService {
 
     public AnswerEntity save(AnswerEntity answer);
 
-    public AnswerEntity delete(Integer id);
+    public Boolean delete(Integer id);
 
     public AnswerEntity update(Integer id, AnswerEntity newAnswer);
 }

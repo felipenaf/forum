@@ -4,7 +4,10 @@ import github.io.forum.entity.AnswerEntity;
 import github.io.forum.repository.AnswerRepository;
 import github.io.forum.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AnswerServiceImpl implements AnswerService {
@@ -19,8 +22,15 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public AnswerEntity delete(Integer id) {
-        return null;
+    public Boolean delete(Integer id) {
+        Optional<AnswerEntity> answer = answerRepository.findById(id);
+
+        if(answer.isPresent()) {
+            answerRepository.delete(answer.get());
+            return true;
+        }
+
+        return false;
     }
 
     @Override

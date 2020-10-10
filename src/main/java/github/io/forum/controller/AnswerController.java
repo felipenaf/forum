@@ -33,11 +33,10 @@ public class AnswerController {
     @ApiOperation(value = "Apagar uma resposta")
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Integer id){
-        Optional<AnswerEntity> answer = answerRepository.findById(id);
+        Boolean answer = answerService.delete(id);
 
-        if(answer.isPresent()) {
-            answerRepository.delete(answer.get());
-            return ResponseEntity.noContent().build();
+        if(answer == true) {
+            return new ResponseEntity(HttpStatus.OK);
         }
 
         return new ResponseEntity(HttpStatus.NOT_FOUND);
