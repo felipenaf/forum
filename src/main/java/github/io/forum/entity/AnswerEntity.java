@@ -1,4 +1,4 @@
-package github.io.forum.rest.entity;
+package github.io.forum.entity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -66,4 +66,7 @@ public class AnswerEntity {
         this.question = question;
     }
 
+    public QuestionEntity getQuestion() {
+        return question;
+    }
 }
