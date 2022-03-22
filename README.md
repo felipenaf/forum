@@ -24,6 +24,7 @@ API desenvolvida para um desafio com Java Spring Boot.
 A base de dados é em memória
 
 - endpoint: `/h2-console`
+- driver: `jdbc:h2:mem:testdb`
 - username: `forum`
 - password: `123` 
 
