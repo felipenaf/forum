@@ -2,6 +2,7 @@ package github.io.forum;
 
 import github.io.forum.entity.AnswerEntity;
 import github.io.forum.entity.QuestionEntity;
+import github.io.forum.entity.UserEntity;
 import github.io.forum.repository.AnswerRepository;
 import github.io.forum.repository.QuestionRepository;
 import org.junit.Test;
@@ -23,7 +24,8 @@ public class AnswerRepositoryTest {
 
     @Test
     public void saveAnswerTest() {
-        QuestionEntity questionEntity = new QuestionEntity("Pra que serve o @Controller?", "Felipe");
+        UserEntity userEntity = new UserEntity("Felipe", "felipe@felipe", "123");
+        QuestionEntity questionEntity = new QuestionEntity("Pra que serve o @Controller?", userEntity);
         this.questionRepository.save(questionEntity);
 
         AnswerEntity answerEntity = new AnswerEntity(questionEntity, "Criar um controller", "Shibata");

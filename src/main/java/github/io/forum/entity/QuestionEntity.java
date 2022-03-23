@@ -15,7 +15,11 @@ public class QuestionEntity {
     private Integer id;
 
     private String content;
-    private String user;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    @JsonIgnoreProperties({"question", "password"})
+    private UserEntity user;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="creation_date", nullable = false, columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
@@ -31,7 +35,7 @@ public class QuestionEntity {
 
     public QuestionEntity() {}
 
-    public QuestionEntity(String content, String user) {
+    public QuestionEntity(String content, UserEntity user) {
         this.content = content;
         this.user = user;
     }
@@ -60,11 +64,11 @@ public class QuestionEntity {
         this.content = content;
     }
 
-    public String getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 

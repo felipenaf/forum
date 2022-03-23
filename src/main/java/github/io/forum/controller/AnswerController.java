@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/answer")
+@RequestMapping("/answers")
 public class AnswerController {
 
     @Autowired
