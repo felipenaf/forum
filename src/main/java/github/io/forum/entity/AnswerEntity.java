@@ -1,5 +1,7 @@
 package github.io.forum.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,7 +18,11 @@ public class AnswerEntity {
     private QuestionEntity question;
 
     private String content;
-    private String user;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    @JsonIgnoreProperties({"question", "password"})
+    private UserEntity user;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="creation_date", nullable = false, columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
@@ -24,7 +30,7 @@ public class AnswerEntity {
 
     public AnswerEntity() {}
 
-    public AnswerEntity(QuestionEntity question, String content, String user) {
+    public AnswerEntity(QuestionEntity question, String content, UserEntity user) {
         this.question = question;
         this.content = content;
         this.user = user;
@@ -46,11 +52,11 @@ public class AnswerEntity {
         this.content = content;
     }
 
-    public String getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 

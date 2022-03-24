@@ -21,16 +21,17 @@ public class AnswerRepositoryTest {
 
     @Test
     public void saveAnswerTest() {
-        UserEntity userEntity = new UserEntity("Felipe", "felipe@felipe", "123");
-        QuestionEntity questionEntity = new QuestionEntity("Pra que serve o @Controller?", userEntity);
+        UserEntity felipe = new UserEntity("Felipe", "felipe@test", "123");
+        QuestionEntity questionEntity = new QuestionEntity("Pra que serve o @Controller?", felipe);
         this.questionRepository.save(questionEntity);
 
-        AnswerEntity answerEntity = new AnswerEntity(questionEntity, "Criar um controller", "Shibata");
+        UserEntity dunha = new UserEntity("Dunha", "dunha@test", "123");
+        AnswerEntity answerEntity = new AnswerEntity(questionEntity, "Criar um controller", dunha);
         this.answerRepository.save(answerEntity);
 
         assertThat(answerEntity.getId()).isNotNull();
         assertThat(answerEntity.getContent()).isEqualTo("Criar um controller");
-        assertThat(answerEntity.getUser()).isEqualTo("Shibata");
+        assertThat(answerEntity.getUser()).isEqualTo(dunha);
     }
 
 }
