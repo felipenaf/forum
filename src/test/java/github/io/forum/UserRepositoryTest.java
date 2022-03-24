@@ -25,7 +25,6 @@ public class UserRepositoryTest {
         assertThat(userEntity.getEmail()).isEqualTo("felipe@felipe");
         assertThat(userEntity.getName()).isEqualTo("Felipe");
         assertThat(userEntity.getPassword()).isEqualTo("123");
-        assertThat(userEntity.getId()).isEqualTo(1);
     }
 
     @Test
