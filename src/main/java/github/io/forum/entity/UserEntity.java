@@ -25,6 +25,9 @@ public class UserEntity {
     @JsonIgnoreProperties("user")
     private Set<QuestionEntity> question;
 
+    @Column(name="deleted", nullable = false, columnDefinition = "tinyint default false")
+    private boolean deleted;
+
     public UserEntity() {}
 
     public UserEntity(String name, String email, String password) {
@@ -71,5 +74,13 @@ public class UserEntity {
 
     public void setQuestion(Set<QuestionEntity> question) {
         this.question = question;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

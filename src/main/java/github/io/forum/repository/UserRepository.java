@@ -3,9 +3,11 @@ package github.io.forum.repository;
 import github.io.forum.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface UserRepository extends JpaRepository<UserEntity, Integer > {
 
-//    List<QuestionEntity> findAllByDeletedOrderByCreationDateDesc(Boolean deleted);
+    List<UserEntity> findAllByDeleted(Boolean deleted);
 
 }
 
