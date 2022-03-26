@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,4 +40,22 @@ public class UserRepositoryTest {
         assertThat(result.size()).isEqualTo(1);
     }
 
+    @Test
+    public void getUserTest() {
+        UserEntity userEntity = new UserEntity("Felipe", "felipe@felipe", "123");
+        this.userRepository.save(userEntity);
+
+        Optional<UserEntity> result = userRepository.findById(userEntity.getId());
+        assertThat(result.isPresent()).isTrue();
+    }
+
+    @Test
+    public void deleteUserTest() {
+        UserEntity userEntity = new UserEntity("Felipe", "felipe@felipe", "123");
+        this.userRepository.save(userEntity);
+
+        userRepository.delete(userEntity);
+        Optional<UserEntity> result = userRepository.findById(userEntity.getId());
+        assertThat(result.isPresent()).isFalse();
+    }
 }
